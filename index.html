@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Psychicgame</title>
+</head>
+
+<body>
+    <p> Wins: <span id="win"></span></p>
+    <p> losses: <span id="lose"></span></p>
+    <p> Guess left: <span id="guessleft"></span></p>
+    <p> lettersguessed: <span id="lettersguessed"></span></p>
+
+    <script>
+        var arrayletter = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",]
+        var wins = 0;
+        var loss = 0;
+        var guessleft;
+        var userguess;
+        var guessedLetters;
+        var computerGuess;
+        var htmlWin = document.getElementById("win")
+        var htmllose = document.getElementById("lose")
+        var htmlguessleft = document.getElementById("guessleft")
+        var htmlletterguessed = document.getElementById("lettersguessed")
+
+
+        reset()
+        function reset() {
+            guessleft = 9; //sets guesses left to 9 guesses
+            guessedLetters = []
+            computerGuess = arrayletter[Math.floor(Math.random() * arrayletter.length)];
+            console.log("wins: " + wins)
+            htmlWin.innerHTML = wins;
+            console.log("losses: " + loss)
+            htmllose.innerHTML = loss;
+            console.log("Guess a Letter")
+            htmlguessleft.innerHTML = guessleft;
+            htmlletterguessed.innerHTML = ""
+        }
+        document.onkeyup = function (event) {
+            userguess = event.key.toLowerCase();
+            console.log(userguess)
+            if (arrayletter.indexOf(userguess) !== -1) {
+                if (guessedLetters.indexOf(userguess) === -1) {
+                    guessedLetters.push(userguess)
+                    check()
+                }
+                else {
+                    alert("you already guessed this letter")
+                }
+            }
+            else {
+                alert("you may only guess a letter")
+            }
+            // set up the magic letter??
+
+
+        }
+        function check() {
+            console.log(computerGuess, userguess);
+
+            // check if is a letter??
+
+            // conditions to win or loss
+
+            if (userguess === computerGuess) {
+                wins++;
+                console.log("win")
+                reset()
+            }
+            if (userguess !== computerGuess) {
+                guessleft--;
+                htmlguessleft.innerHTML = guessleft;
+                console.log(guessedLetters.join(" "))
+                htmlletterguessed.innerHTML = guessedLetters.join(" ")
+                console.log("guess again you have " + guessleft + " guesses left")
+
+                if (guessleft === 0) {
+                    console.log("YOU LOSE")
+                    loss++;
+                    reset()
+
+                }
+
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
