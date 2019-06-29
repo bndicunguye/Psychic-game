@@ -9,7 +9,14 @@
 </head>
 
 <body>
-    guess a letter to start!
+    <h1> The Psychic Game</h1>
+
+    <br>
+
+    Guess What letter i'm thinking of
+
+    <br>
+
     <p> Wins: <span id="win"></span></p>
     <p> losses: <span id="lose"></span></p>
     <p> Guess left: <span id="guessleft"></span></p>
@@ -31,20 +38,16 @@
 
         reset()
         function reset() {
-            guessleft = 9; //sets guesses left to 9 guesses
+            guessleft = 9;
             guessedLetters = []
             computerGuess = arrayletter[Math.floor(Math.random() * arrayletter.length)];
-            console.log("wins: " + wins)
             htmlWin.innerHTML = wins;
-            console.log("losses: " + loss)
             htmllose.innerHTML = loss;
-            console.log("Guess a Letter")
             htmlguessleft.innerHTML = guessleft;
             htmlletterguessed.innerHTML = ""
         }
         document.onkeyup = function (event) {
             userguess = event.key.toLowerCase();
-            console.log(userguess)
             if (arrayletter.indexOf(userguess) !== -1) {
                 if (guessedLetters.indexOf(userguess) === -1) {
                     guessedLetters.push(userguess)
@@ -57,31 +60,23 @@
             else {
                 alert("you may only guess a letter")
             }
-            // set up the magic letter??
 
 
         }
         function check() {
-            console.log(computerGuess, userguess);
 
-            // check if is a letter??
-
-            // conditions to win or loss
 
             if (userguess === computerGuess) {
                 wins++;
-                console.log("win")
                 reset()
             }
             if (userguess !== computerGuess) {
                 guessleft--;
                 htmlguessleft.innerHTML = guessleft;
-                console.log(guessedLetters.join(" "))
                 htmlletterguessed.innerHTML = guessedLetters.join(" ")
-                console.log("guess again you have " + guessleft + " guesses left")
 
                 if (guessleft === 0) {
-                    console.log("YOU LOSE")
+
                     loss++;
                     reset()
 
